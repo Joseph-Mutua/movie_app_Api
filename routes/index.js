@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const movies = require("../data/movies");
 
 /* GET home page. */
@@ -14,10 +13,6 @@ router.get("/most_popular", (req, res, next) => {
 
   if (page === undefined) {
     page = 1;
-  }
-
-  if (req.query.api_key != 12345689) {
-    return res.json("Invalid API key");
   }
 
   let results = movies.filter((movie) => {

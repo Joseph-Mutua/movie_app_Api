@@ -15,6 +15,13 @@ const searchRouter = require("./routes/search");
 var app = express();
 app.use(helmet());
 
+app.use((req, res, next) => {
+  if (req.query.api_key != 12345689) {
+    return res.status(401).json("Invalid API Key");
+  }
+  next();
+});
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
