@@ -9,6 +9,8 @@ function requireJSON(req, res, next) {
   next();
 }
 
+
+
 router.param("movieId", (req, res, next) => {
   //Update the db with analytics data
 
@@ -58,5 +60,7 @@ router.post("/:movieId/rating", requireJSON, (req, res, next) => {
 router.delete("/:movieId/rating", requireJSON, (req, res, next) => {
   res.json({ msg: "Rating Deleted!" });
 });
+
+
 
 module.exports = router;
