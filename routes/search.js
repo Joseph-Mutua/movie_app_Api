@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const movies = require("../data/movies");
+const people = require("../data/people");
 
 //This will be used by all the routes in this router
 function queryRequired(req, res, next) {
@@ -20,9 +21,17 @@ router.get("/movie", (req, res, next) => {
     return found;
   });
 
-  res.json("Test");
+  res.json({results});
 });
 
-router.get("/person", (req, res, next) => {});
+router.get("/person", (req, res, next) => {
+  const searchTerm = req.query.query;
+  const results = movies.filter((person) => {
+    let found = person.name.includes(searchTerm);
+    return found;
+  });
+
+  res.json({results});
+});
 
 module.exports = router;
