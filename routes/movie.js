@@ -6,7 +6,7 @@ const movieDetails = require("../data/movieDetails");
 function requireJSON(req, res, next) {
   if (!req.is("application/json"))
     res.json({ msg: "Content type must be application/json" });
-  res.json("Test");
+  next();
 }
 
 router.param("movieId", (req, res, next) => {
@@ -52,7 +52,11 @@ router.post("/:movieId/rating", requireJSON, (req, res, next) => {
   if (userRating < 0.5 || userRating > 10)
     res.json({ msg: "Rating must be betweeen .5 and 10" });
 
-  res.json({ msg: "Thank you for submitting your rating" });
+  res.json({ msg: "Thank you for submitting your rating", status_code: 200 });
+});
+
+router.delete("/:movieId/rating", requireJSON, (req, res, next) => {
+  res.json({ msg: "Rating Deleted!" });
 });
 
 module.exports = router;
